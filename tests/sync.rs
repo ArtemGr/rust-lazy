@@ -53,6 +53,13 @@ describe! sync {
         assert_eq!(5, **data);
     }
 
+    describe! unwrap {
+        it "should retrieve the value" {
+            let val = sync_lazy!(7);
+            assert_eq!(val.unwrap(), 7);
+        }
+    }
+
     describe! evaluated {
         it "should create an already evaluated thunk" {
             let x = Thunk::evaluated(10);

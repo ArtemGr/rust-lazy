@@ -75,6 +75,15 @@ impl<'a, T: Send + Sync> Thunk<'a, T> {
             None => self.inner.wait()
         }
     }
+
+    /// Force evaluation and consume the thunk
+    pub fn unwrap(self) -> T {
+        self.force();
+        match self.inner.into_inner() {
+            Evaluated(val) => val,
+            _ => unsafe { debug_unreachable!() },
+        }
+    }
 }
 
 impl<'a, T: Send + Sync> DerefMut for Thunk<'a, T> {
