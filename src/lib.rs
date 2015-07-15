@@ -1,5 +1,4 @@
 #![deny(missing_docs, warnings)]
-#![feature(core)]
 
 //! Lazy evaluation for Rust.
 
